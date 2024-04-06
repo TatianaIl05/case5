@@ -1,5 +1,6 @@
 import pygame
 from random import randint
+from prettytable import PrettyTable
 
 food = [2000, 2000, 2000, 2000]
 people = [1000, 1000, 1000, 1000]
@@ -82,6 +83,46 @@ def monthly_food(team):
     print(food[players.index(team)])
 
 
+def question(team):
+    if current_team == team:
+        if input('У Вас есть возможность взаимодействовать с другими командами. '
+                 'Хотите ли Вы бросить кому-то вызов?').lower() == 'да':
+            compete_team = input('Введите название команды, с которой вы будете соревноваться: ')
+            print(f'Команда {team} бросила вызов команде {compete_team}')
+
+
+@ question
+def answer(team):
+    if current_team == team:
+        if input(f'Согласна ли команда на противостояние?').lower() == 'да':
+            print('Противостояние')
+            battle(question.__getattribute__(team), team)
+        else:
+            print('Отказ от противостояния')
+            reconcile(question.__getattribute__(team), team)
+
+
+def battle(team_ask, team_accept):
+
+    num_ask = randint(1, 100)
+    num_accept = randint(1, 100)
+    print(f'team_1: {num_ask}, team_2: {num_accept}')
+    if num_ask > num_accept:
+        food[players.index(team_ask-1)] += 0.5*food[players.index(team_accept-1)]
+        food[players.index(team_accept-1)] *= 0.5
+    elif num_ask < num_accept:
+        food[players.index(team_accept - 1)] += 0.5 * food[players.index(team_ask - 1)]
+        food[players.index(team_ask - 1)] *= 0.5
+    else:
+        food[players.index(team_accept - 1)] += 50
+        food[players.index(team_ask - 1)] += 50
+
+
+def reconcile(team_ask, team_accept):
+    food[players.index(team_accept)] *= 0.8
+    people[players.index(team_ask)] *= 0.8
+
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -117,7 +158,20 @@ pygame.quit()
 month = 1
 while month < 8:
     month += 1
+    current_team = 1
+    resource_table = PrettyTable()
+    resource_table.add_column('Команды', [1, 2, 3, 4])
+    resource_table.add_column('Пропитание', food)
+    resource_table.add_column('Экипаж', people)
+    resource_table.add_column('Ценные находки', findings)
+    resource_table.add_column('Средства защиты', protection_means)
+    resource_table.add_column('Средства изучения', research_tools)
+    print(resource_table)
     match current_team:
         case 1:
             alien_invasion(team_1)
             monthly_food(team_1)
+            question(1)
+            current_team += 1
+        case 2:
+            answer(2)
