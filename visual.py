@@ -1,4 +1,11 @@
 import pygame
+from random import randint
+
+food = [2000, 2000, 2000, 2000]
+people = [1000, 1000, 1000, 1000]
+findings = [0, 0, 0, 0]
+research_tools = [20, 20, 20, 20]
+protection_means = [50, 50, 50, 50]
 
 pygame.init()
 
@@ -72,7 +79,6 @@ while running:
         match current_team:
             case 1:
                 team_1.do(square_colors[0], trace_colors[0])
-
             case 2:
                 team_2.do(square_colors[1], trace_colors[1])
             case 3:
@@ -85,6 +91,19 @@ while running:
                 pygame.draw.rect(screen, square_colors[i - 1], pygame.Rect(players[i - 1].x, players[i - 1].y, 10, 10))
                 for point in players[i - 1].trace_points:
                     pygame.draw.rect(screen, trace_colors[i - 1], pygame.Rect(point[0], point[1], 1, 1))
-
+    pygame.draw.circle(screen, 'blue', (270, 430), 10)
     pygame.display.update()
+
 pygame.quit()
+
+
+def alien_invasion(team):
+    if 200 < team.x < 340 and 360 < team.y < 500:
+        probability = 1
+    else:
+        probability = randint(1, 100)/100
+
+    if probability > 0.5:
+        print('Нападение инопланетных рас')
+        people[players.index(team)] *= 0.9
+        protection_means[players.index(team)] *= 0.9
