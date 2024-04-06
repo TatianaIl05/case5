@@ -64,13 +64,30 @@ background = pygame.image.load('space_background.png')
 running = True
 current_team = 1
 
+
+def alien_invasion(team):
+    probability = randint(1, 100)/100
+
+    if probability > 0.9:
+        print('Нападение инопланетных рас')
+        people[players.index(team)] *= 0.9
+        protection_means[players.index(team)] *= 0.9
+        print(team.x, team.y)
+        print(people[players.index(team)], protection_means[players.index(team)])
+
+
+def monthly_food(team):
+    food[players.index(team)] += 1000
+    food[players.index(team)] -= people[players.index(team)]//4
+    print(food[players.index(team)])
+
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_0:
-                cur_x, cur_y = team_1.x, team_1.y
                 if current_team == 1 or current_team == 2 or current_team == 3 or current_team == 4:
                     current_team += 1
                 if current_team == 5:
@@ -97,13 +114,10 @@ while running:
 pygame.quit()
 
 
-def alien_invasion(team):
-    if 200 < team.x < 340 and 360 < team.y < 500:
-        probability = 1
-    else:
-        probability = randint(1, 100)/100
-
-    if probability > 0.5:
-        print('Нападение инопланетных рас')
-        people[players.index(team)] *= 0.9
-        protection_means[players.index(team)] *= 0.9
+month = 1
+while month < 8:
+    month += 1
+    match current_team:
+        case 1:
+            alien_invasion(team_1)
+            monthly_food(team_1)
