@@ -122,7 +122,8 @@ def reconcile(team_ask, team_accept):
     food[players.index(team_accept)] *= 0.8
     people[players.index(team_ask)] *= 0.8
 
-
+count_times = 0
+# for i in range(7): count_times == 0+i, 1+i, 2+i, 3+i
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -133,10 +134,14 @@ while running:
                     current_team += 1
                 if current_team == 5:
                     current_team = 1
-
         match current_team:
             case 1:
                 team_1.do(square_colors[0], trace_colors[0])
+                if count_times == 0:
+                    alien_invasion(team_1)
+                    monthly_food(team_1)
+                    count_times += 1
+
             case 2:
                 team_2.do(square_colors[1], trace_colors[1])
             case 3:
@@ -154,7 +159,7 @@ while running:
 
 pygame.quit()
 
-
+'''
 month = 1
 while month < 8:
     month += 1
@@ -175,3 +180,4 @@ while month < 8:
             current_team += 1
         case 2:
             answer(2)
+'''
