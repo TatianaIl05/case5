@@ -122,6 +122,7 @@ def reconcile(team_ask, team_accept):
     food[players.index(team_accept)] *= 0.8
     people[players.index(team_ask)] *= 0.8
 
+
 count_times = 0
 # for i in range(7): count_times == 0+i, 1+i, 2+i, 3+i
 while running:
