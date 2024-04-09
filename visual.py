@@ -3,7 +3,7 @@ from random import randint
 from prettytable import PrettyTable
 
 food = [2000, 2000, 2000, 2000]
-people = [1000, 1000, 1000, 1000]
+people = [7000, 7000, 7000, 7000]
 findings = [0, 0, 0, 0]
 research_tools = [20, 20, 20, 20]
 defense = [50, 50, 50, 50]
@@ -38,11 +38,11 @@ class Player:
 
     def draw(self, color1):
         screen.blit(background, (0, 0))
-        pygame.draw.rect(screen, color1, pygame.Rect(self.x, self.y, 10, 10))
+        pygame.draw.rect(screen, color1, (self.x, self.y, 10, 10))
 
     def trace(self, color2):
         for point in self.trace_points:
-            pygame.draw.rect(screen, color2, pygame.Rect(point[0], point[1], 1, 1))
+            pygame.draw.rect(screen, color2, (point[0], point[1], 1, 1))
 
     def do(self, color1, color2):
         self.move()
@@ -50,10 +50,30 @@ class Player:
         self.trace(color2)
 
 
+class HealthBar:
+    def __init__(self, x, y, max_hp, width, colour):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.hp = max_hp
+        self.max_hp = max_hp
+        self.colour = colour
+
+    def draw(self):
+        ratio = self.hp / self.max_hp
+        pygame.draw.rect(screen, 'black', (self.x, self.y, self.max_hp, self.width))
+        pygame.draw.rect(screen, self.colour, (self.x, self.y, self.max_hp * ratio, self.width))
+
+
 team_1 = Player(input('Введите имя команды 1: '), 50, 50)
 team_2 = Player(input('Введите имя команды 2: '), 550, 550)
 team_3 = Player(input('Введите имя команды 3: '), 50, 550)
 team_4 = Player(input('Введите имя команды 4: '), 550, 50)
+
+bar_1 = HealthBar(10, 10, people[0]/100, 20, 'red')
+bar_2 = HealthBar(520, 570, people[1]/100, 20, 'yellow')
+bar_3 = HealthBar(10, 570, people[2]/100, 20, 'green')
+bar_4 = HealthBar(520, 10, people[3]/100, 20, 'blue')
 
 players = [team_1, team_2, team_3, team_4]
 square_colors = ['red', 'yellow', 'green', 'blue']
@@ -91,7 +111,7 @@ def question():
     if input('У Вас есть возможность взаимодействовать с другими командами. '
              'Хотите ли Вы бросить кому-то вызов? ').lower() == 'да':
         compete_team = int(input('Введите номер команды, с которой вы будете соревноваться: '))
-        while compete_team == current_team:
+        while compete_team == current_team or compete_team > 4:
             print('Неверное значение')
             compete_team = int(input('Введите другое значение: '))
         rival_teams[compete_team - 1] = current_team
@@ -133,6 +153,10 @@ def reconcile():
 count_times = 0
 # for i in range(7): count_times == 0+i, 1+i, 2+i, 3+i
 while running:
+    bar_1.draw()
+    bar_2.draw()
+    bar_3.draw()
+    bar_4.draw()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -150,6 +174,7 @@ while running:
                     monthly_food(team_1)
                     answer() if count_times != 0 else print('Пока никто не бросил вызов')
                     question()
+                    bar_1.hp = people[0]/100
                     count_times += 1
 
             case 2:
@@ -157,6 +182,9 @@ while running:
                 if count_times == 1:
                     alien_invasion(team_2)
                     monthly_food(team_2)
+                    answer()
+                    question()
+                    bar_2.hp = people[1] / 100
                     count_times += 1
             case 3:
                 team_3.do(square_colors[2], trace_colors[2])
@@ -165,6 +193,7 @@ while running:
                     monthly_food(team_3)
                     answer()
                     question()
+                    bar_3.hp = people[2] / 100
                     count_times += 1
             case 4:
                 team_4.do(square_colors[3], trace_colors[3])
@@ -173,6 +202,7 @@ while running:
                     monthly_food(team_4)
                     answer()
                     question()
+                    bar_4.hp = people[3] / 100
                     rival_teams[0], rival_teams[1], rival_teams[2] = 0, 0, 0
                     resource_table = PrettyTable()
                     resource_table.add_column('Команды', [1, 2, 3, 4])
