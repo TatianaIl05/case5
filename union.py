@@ -25,28 +25,18 @@ people = [7000, 7000, 7000, 7000]
 def refusal_union():
     people[current_team - 1] -= 400'''
 
-def question():
+def question_union():
     global current_team
-    for i in range(2):
-        if i == 0:
-            if input('У Вас есть возможность взаимодействовать с другими командами. '
-                     'Хотите ли Вы бросить кому-то вызов? ').lower() == 'да':
-                compete_team = int(input('Введите номер команды, с которой вы будете соревноваться: '))
-                while compete_team == current_team or compete_team > 4:
-                    print('Неверное значение')
-                    compete_team = int(input('Введите другое значение: '))
-                rival_teams[compete_team - 1] = current_team
-                print(f'Команда {current_team} бросила вызов команде {compete_team}')
-        else:
-            if input('У Вас есть возможность взаимодействовать с другими командами. '
-                     'Хотите ли Вы предложить кому-то союз? ').lower() == 'да':
-                compete_team = int(input('Введите номер команды для предложения союза: '))
-                while compete_team == current_team or compete_team > 4:
-                    print('Неверное значение')
-                    compete_team = int(input('Введите другое значение: '))
-                rival_teams[compete_team - 1] = current_team
-                print(f'Команда {current_team} предложила союз {compete_team}')
-question()
+    if input('У Вас есть возможность взаимодействовать с другими командами. '
+             'Хотите ли Вы предложить кому-то союз? ').lower() == 'да':
+        compete_team = int(input('Введите номер команды для предложения союза: '))
+        while compete_team == current_team or compete_team > 4:
+            print('Неверное значение')
+            compete_team = int(input('Введите другое значение: '))
+        rival_teams[compete_team - 1] = current_team
+        print(f'Команда {current_team} предложила союз {compete_team}')
+
+question_union()
 
 def answer_union():
     global current_team
