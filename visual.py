@@ -88,7 +88,8 @@ current_team = 1
 
 def alien_invasion(team):
     probability = randint(1, 100)/100
-
+    if 220 < team.x < 320 and 380 < team.y < 480:
+        probability = 1
     if probability > 0.9:
         print('Нападение инопланетных рас')
         people[players.index(team)] *= 0.9
@@ -204,6 +205,7 @@ while running:
                     question()
                     bar_4.hp = people[3] / 100
                     rival_teams[0], rival_teams[1], rival_teams[2] = 0, 0, 0
+                    count_times = 0
                     resource_table = PrettyTable()
                     resource_table.add_column('Команды', [1, 2, 3, 4])
                     resource_table.add_column('Пропитание', food)
@@ -212,7 +214,6 @@ while running:
                     resource_table.add_column('Средства защиты', defense)
                     resource_table.add_column('Средства изучения', research_tools)
                     print(resource_table)
-                    count_times = 0
 
         for i in range(1, 4 + 1):
             if i != current_team:
