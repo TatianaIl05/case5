@@ -47,7 +47,9 @@ def answer_union():
             food[rival_teams[current_team - 1] - 1] = (food[current_team - 1] + food[
                 rival_teams[current_team - 1] - 1]) // 2
             food[current_team - 1] = (food[current_team - 1] + food[rival_teams[current_team - 1] - 1]) // 2
+            # return ['f', food[current_team - 1]]
         else:
             print('Отказ от союза')
             people[current_team - 1] -= 400
+            # return ['w', people[current_team - 1]]
 answer_union()
