@@ -1,3 +1,4 @@
+import ru_local as ru
 import random
 people = 1000
 
@@ -8,10 +9,10 @@ def sickness():
     roulette_failure = (1, 2, 3)
     result_failure = random.choice(roulette_failure)
     if result_failure == 1:
-        print('Экипаж был заражён космической болезнью')
+        print(ru.DISEASE)
         people -= result_death
         print(people)
 
     return people
 
-sickness()
+sickness() #Запуск случайного события - болезни
