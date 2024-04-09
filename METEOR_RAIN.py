@@ -46,11 +46,27 @@ def aware():
         aware()
 
 
-
 def meteor_rain(defence, stuff):
-    if aware() == True and int(meteor_chance) == 1:
-        meteor_damage_chance = random.randint(1, 2):
-        if
+    aware_ = aware()
+    if aware_ == True and int(meteor_chance) == 1:
+        meteor_damage_chance = random.randint(1, 2)
+        if int(meteor_damage_chance) == 1:
+            if defence >= 20:
+                defence = defence // 2
+            elif defence < 20:
+                defence = 0
+            elif defence == 0:
+                stuff = stuff // 3
+        else:
+            print('The meteor rain have ran other side. Lucky you')
+        return [defence, stuff]
+    elif aware_ == True and int(meteor_chance) == 2:
+        print(f'You stayed on location, what will be next?')
+        return [defence, stuff]
+    elif aware == None and int(meteor_chance) == 1:
+
+    else:
+        return [defence, stuff]
 
 
 meteor_rain(2, 4)
