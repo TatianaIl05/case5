@@ -122,6 +122,7 @@ def reconcile(team_ask, team_accept):
     food[players.index(team_accept)] *= 0.8
     people[players.index(team_ask)] *= 0.8
 
+
 count_times = 0
 # for i in range(7): count_times == 0+i, 1+i, 2+i, 3+i
 while running:
@@ -144,10 +145,30 @@ while running:
 
             case 2:
                 team_2.do(square_colors[1], trace_colors[1])
+                if count_times == 1:
+                    alien_invasion(team_2)
+                    monthly_food(team_2)
+                    count_times += 1
             case 3:
                 team_3.do(square_colors[2], trace_colors[2])
+                if count_times == 2:
+                    alien_invasion(team_3)
+                    monthly_food(team_3)
+                    count_times += 1
             case 4:
                 team_4.do(square_colors[3], trace_colors[3])
+                if count_times == 3:
+                    alien_invasion(team_4)
+                    monthly_food(team_4)
+                    resource_table = PrettyTable()
+                    resource_table.add_column('Команды', [1, 2, 3, 4])
+                    resource_table.add_column('Пропитание', food)
+                    resource_table.add_column('Экипаж', people)
+                    resource_table.add_column('Ценные находки', findings)
+                    resource_table.add_column('Средства защиты', protection_means)
+                    resource_table.add_column('Средства изучения', research_tools)
+                    print(resource_table)
+                    count_times = 0
 
         for i in range(1, 4 + 1):
             if i != current_team:
@@ -158,26 +179,3 @@ while running:
     pygame.display.update()
 
 pygame.quit()
-
-'''
-month = 1
-while month < 8:
-    month += 1
-    current_team = 1
-    resource_table = PrettyTable()
-    resource_table.add_column('Команды', [1, 2, 3, 4])
-    resource_table.add_column('Пропитание', food)
-    resource_table.add_column('Экипаж', people)
-    resource_table.add_column('Ценные находки', findings)
-    resource_table.add_column('Средства защиты', protection_means)
-    resource_table.add_column('Средства изучения', research_tools)
-    print(resource_table)
-    match current_team:
-        case 1:
-            alien_invasion(team_1)
-            monthly_food(team_1)
-            question(1)
-            current_team += 1
-        case 2:
-            answer(2)
-'''
