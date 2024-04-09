@@ -6,7 +6,7 @@ food = [2000, 2000, 2000, 2000]
 people = [1000, 1000, 1000, 1000]
 findings = [0, 0, 0, 0]
 research_tools = [20, 20, 20, 20]
-protection_means = [50, 50, 50, 50]
+defense = [50, 50, 50, 50]
 
 pygame.init()
 
@@ -72,9 +72,9 @@ def alien_invasion(team):
     if probability > 0.9:
         print('Нападение инопланетных рас')
         people[players.index(team)] *= 0.9
-        protection_means[players.index(team)] *= 0.9
+        defense[players.index(team)] *= 0.9
         print(team.x, team.y)
-        print(people[players.index(team)], protection_means[players.index(team)])
+        print(people[players.index(team)], defense[players.index(team)])
 
 
 def monthly_food(team):
@@ -179,7 +179,7 @@ while running:
                     resource_table.add_column('Пропитание', food)
                     resource_table.add_column('Экипаж', people)
                     resource_table.add_column('Ценные находки', findings)
-                    resource_table.add_column('Средства защиты', protection_means)
+                    resource_table.add_column('Средства защиты', defense)
                     resource_table.add_column('Средства изучения', research_tools)
                     print(resource_table)
                     count_times = 0
