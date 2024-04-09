@@ -1,6 +1,8 @@
 import ru_local as ru
 import random
 people = 1000
+findings = 0
+research_tools = 20
 
 def sickness():
     global people
@@ -11,8 +13,25 @@ def sickness():
     if result_failure == 1:
         print(ru.DISEASE)
         people -= result_death
-        print(people)
 
     return people
 
+def artifacts():
+    global findings
+    global research_tools
+    items = (1, 2, 3, 4, 5, 6, 7, 8, 9)
+    result_items = random.choice(items)
+    if result_items % 2 == 0 or result_items == 3:
+        print('Экипаж нашел ценный артефакт!')
+        findings += 1
+        if result_items == 2 or result_items == 4:
+            research_tools += 30
+        elif result_items == 6 or result_items == 8:
+            research_tools += 20
+        else:
+            research_tools += 80
+
+    return findings, research_tools
+
 sickness() #Запуск случайного события - болезни
+artifacts() #Запуск случайного события - ценные артефакты
