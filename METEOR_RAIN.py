@@ -63,7 +63,7 @@ def meteor_rain(defence, stuff):
     elif aware_ == True and int(meteor_chance) == 2:
         print(f'You stayed on location, what will be next?')
         return [defence, stuff]
-    elif aware == None and int(meteor_chance) == 1:
+    # elif aware == None and int(meteor_chance) == 1:
 
     else:
         return [defence, stuff]
