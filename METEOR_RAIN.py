@@ -5,13 +5,13 @@ import random
 def case_if_check():
     avaliable_meteor_check = str(random.randint(1, 2))
     if avaliable_meteor_check == '1':
-        global meteor_chance
-        meteor_chance = random.randint(1, 2)
         match meteor_chance:
             case 1:
                 print('There is a meteor danger')
+                case_if_stay_go()
             case 2:
                 print('There is no meteor danger')
+                case_if_stay_go()
             # case _:
             #     print('Неверно введено значение')
             #     case_if_check()
@@ -36,6 +36,8 @@ def case_if_stay_go():
 def aware():
     print('Do you want to check meteor activity?', '\n', 'press 1 - yes, press 2 - no')
     a = str(input())
+    global meteor_chance
+    meteor_chance = random.randint(1, 2)
     if a == '1':
         return case_if_check()
     elif a == '2':
@@ -48,6 +50,7 @@ def aware():
 
 def meteor_rain(defence, stuff):
     aware_ = aware()
+    print()
     if aware_ == True and int(meteor_chance) == 1:
         meteor_damage_chance = random.randint(1, 2)
         if int(meteor_damage_chance) == 1:
