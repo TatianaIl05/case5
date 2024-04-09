@@ -1,6 +1,7 @@
 import pygame
 from random import randint
 from prettytable import PrettyTable
+import METEOR_RAIN
 
 food = [14000, 14000, 14000, 14000]
 people = [7000, 7000, 7000, 7000]
@@ -181,7 +182,8 @@ while running:
                 team_1.do(square_colors[0], trace_colors[0])
                 if count_times == 0:
                     print('Ход первой команды')
-                    print('За этот месяц во время путешествия произошло несколько событий: ')
+                    # print('За этот месяц во время путешествия произошло несколько событий: ')
+                    defense[0], people[0] = METEOR_RAIN.meteor_rain(defense[0], people[0])
                     print(f'Изменение ресурса - пропитание {monthly_food(team_1)}')
                     alien_invasion(team_1)
                     print('Взаимодействия команд: ')
