@@ -22,7 +22,7 @@ def artifacts():
     items = (1, 2, 3, 4, 5, 6, 7, 8, 9)
     result_items = random.choice(items)
     if result_items % 2 == 0 or result_items == 3:
-        print('Экипаж нашел ценный артефакт!')
+        print(ru.ARTEFACT)
         findings += 1
         if result_items == 2 or result_items == 4:
             research_tools += 30
