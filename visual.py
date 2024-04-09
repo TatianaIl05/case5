@@ -83,44 +83,51 @@ def monthly_food(team):
     print(food[players.index(team)])
 
 
-def question(team):
-    if current_team == team:
-        if input('У Вас есть возможность взаимодействовать с другими командами. '
-                 'Хотите ли Вы бросить кому-то вызов?').lower() == 'да':
-            compete_team = input('Введите название команды, с которой вы будете соревноваться: ')
-            print(f'Команда {team} бросила вызов команде {compete_team}')
+rival_teams = [0, 0, 0, 0]
 
 
-@ question
-def answer(team):
-    if current_team == team:
-        if input(f'Согласна ли команда на противостояние?').lower() == 'да':
+def question():
+    global current_team
+    if input('У Вас есть возможность взаимодействовать с другими командами. '
+             'Хотите ли Вы бросить кому-то вызов? ').lower() == 'да':
+        compete_team = int(input('Введите номер команды, с которой вы будете соревноваться: '))
+        while compete_team == current_team:
+            print('Неверное значение')
+            compete_team = int(input('Введите другое значение: '))
+        rival_teams[compete_team - 1] = current_team
+        print(f'Команда {current_team} бросила вызов команде {compete_team}')
+
+
+def answer():
+    global current_team
+    if rival_teams[current_team - 1] != 0:
+        if input(f'Согласна ли команда {current_team} на противостояние с'
+                 f' командой {rival_teams[current_team - 1]}? ').lower() == 'да':
             print('Противостояние')
-            battle(question.__getattribute__(team), team)
+            battle()
         else:
             print('Отказ от противостояния')
-            reconcile(question.__getattribute__(team), team)
+            reconcile()
 
 
-def battle(team_ask, team_accept):
-
+def battle():
     num_ask = randint(1, 100)
     num_accept = randint(1, 100)
     print(f'team_1: {num_ask}, team_2: {num_accept}')
     if num_ask > num_accept:
-        food[players.index(team_ask-1)] += 0.5*food[players.index(team_accept-1)]
-        food[players.index(team_accept-1)] *= 0.5
+        food[rival_teams[current_team - 1] - 1] += 0.5*food[current_team - 1]
+        food[current_team - 1] *= 0.5
     elif num_ask < num_accept:
-        food[players.index(team_accept - 1)] += 0.5 * food[players.index(team_ask - 1)]
-        food[players.index(team_ask - 1)] *= 0.5
+        food[current_team - 1] += 0.5 * food[rival_teams[current_team - 1] - 1]
+        food[rival_teams[current_team - 1] - 1] *= 0.5
     else:
-        food[players.index(team_accept - 1)] += 50
-        food[players.index(team_ask - 1)] += 50
+        food[current_team - 1] += 50
+        food[rival_teams[current_team - 1] - 1] += 50
 
 
-def reconcile(team_ask, team_accept):
-    food[players.index(team_accept)] *= 0.8
-    people[players.index(team_ask)] *= 0.8
+def reconcile():
+    food[current_team - 1] *= 0.8
+    people[rival_teams[current_team - 1] - 1] *= 0.8
 
 
 count_times = 0
@@ -141,6 +148,8 @@ while running:
                 if count_times == 0:
                     alien_invasion(team_1)
                     monthly_food(team_1)
+                    answer() if count_times != 0 else print('Пока никто не бросил вызов')
+                    question()
                     count_times += 1
 
             case 2:
@@ -154,12 +163,17 @@ while running:
                 if count_times == 2:
                     alien_invasion(team_3)
                     monthly_food(team_3)
+                    answer()
+                    question()
                     count_times += 1
             case 4:
                 team_4.do(square_colors[3], trace_colors[3])
                 if count_times == 3:
                     alien_invasion(team_4)
                     monthly_food(team_4)
+                    answer()
+                    question()
+                    rival_teams[0], rival_teams[1], rival_teams[2] = 0, 0, 0
                     resource_table = PrettyTable()
                     resource_table.add_column('Команды', [1, 2, 3, 4])
                     resource_table.add_column('Пропитание', food)
