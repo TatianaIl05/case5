@@ -72,4 +72,4 @@ def meteor_rain(defence, stuff):
         return [defence, stuff]
 
 
-meteor_rain(2, 4)
+# meteor_rain(2, 4)

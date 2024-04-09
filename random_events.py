@@ -1,9 +1,11 @@
 import ru_local as ru
 import random
+people = 1000
 findings = 0
 research_tools = 20
 
-def sickness(people):
+def sickness():
+    global people
     roulette_death = (200, 30, 80, 120, 5, 300)
     result_death = random.choice(roulette_death)
     roulette_failure = (1, 2, 3)
@@ -11,7 +13,6 @@ def sickness(people):
     if result_failure == 1:
         print(ru.DISEASE)
         people -= result_death
-        print(people)
 
     return people
 
