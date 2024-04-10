@@ -1,6 +1,7 @@
 import pygame
 from random import randint
 from prettytable import PrettyTable
+import ru_local as ru
 import METEOR_RAIN
 
 food = [14000, 14000, 14000, 14000]
@@ -68,10 +69,10 @@ class HealthBar:
         pygame.draw.rect(screen, self.colour, (self.x, self.y, self.max_hp * ratio, self.width))
 
 
-team_1 = Player(input('Введите имя команды 1: '), 50, 50)
-team_2 = Player(input('Введите имя команды 2: '), 550, 550)
-team_3 = Player(input('Введите имя команды 3: '), 50, 550)
-team_4 = Player(input('Введите имя команды 4: '), 550, 50)
+team_1 = Player(input(ru.NAME_TEAM1), 50, 50)
+team_2 = Player(input(ru.NAME_TEAM2), 550, 550)
+team_3 = Player(input(ru.NAME_TEAM3), 50, 550)
+team_4 = Player(input(ru.NAME_TEAM4), 550, 50)
 
 bar_1 = HealthBar(10, 10, people[0]/100, 20, 'red')
 bar_2 = HealthBar(520, 570, people[1]/100, 20, 'yellow')
@@ -88,10 +89,10 @@ def alien_invasion(team):
     if 220 < team.x < 320 and 380 < team.y < 480:
         probability = 1
     if probability > 0.9:
-        print('Нападение инопланетных рас')
+        print(ru.ALIEN_ATTACK)
         people[players.index(team)] *= 0.9
         defense[players.index(team)] *= 0.9
-        print(f'Экипаж: {people[players.index(team)]}, Средства защиты: {defense[players.index(team)]}')
+        print(ru.CREW, people[players.index(team)], ru.DEFENSE, defense[players.index(team)])
 
 
 def monthly_food(team):
@@ -105,8 +106,8 @@ rival_teams = [0] * 12
 
 def question():
     global current_team, j
-    if input('Хотите ли Вы бросить кому-то вызов? ').lower() == 'да':
-        compete_team = int(input('Введите номер команды, с которой вы будете соревноваться: '))
+    if input(ru.DESIRE_CHALLENGE).lower() == ru.YES_NO:
+        compete_team = int(input(ru.NUM_TEAM))
         while compete_team == current_team or compete_team > 4:
             print('Неверное значение')
             compete_team = int(input('Введите другое значение: '))
