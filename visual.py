@@ -110,18 +110,17 @@ def question():
     if input(ru.DESIRE_CHALLENGE).lower() == ru.YES_NO:
         compete_team = int(input(ru.NUM_TEAM))
         while compete_team == current_team or compete_team > 4:
-            print('Неверное значение')
-            compete_team = int(input('Введите другое значение: '))
+            print(ru.VALUE_ERROR)
+            compete_team = int(input(ru.OTHER_VALUE))
         rival_teams[current_team - 1 + 4*j] = compete_team
-        print(f'Команда {current_team} бросила вызов команде {compete_team}')
+        print(ru.TEAM, current_team, ru.CHALLENGED, compete_team)
 
 
 def answer():
     global current_team, j
     for k in range(len(rival_teams)):
         if rival_teams[k] == current_team:
-            if input(f'Согласна ли команда {current_team} на противостояние с'
-                     f' командой {int((k+1) % 4) if (k+1) % 4 != 0 else int((k+5)/(j+1))}? ').lower() == 'да':
+            if input(f'{ru.APPROVAL_TEAM} {current_team} {ru.BATTLE} {int((k+1) % 4) if (k+1) % 4 != 0 else int((k+5)/(j+1))}').lower() == 'да':
                 print('Противостояние')
                 battle()
             else:
