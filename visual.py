@@ -185,7 +185,7 @@ while running:
                 team_1.do(square_colors[0], trace_colors[0])
                 if count_times == 0:
                     print('Ход первой команды')
-
+                    food[0], people[0] = STARVE.starve(food[0], people[0])
                     # print('За этот месяц во время путешествия произошло несколько событий: ')
                     defense[0], people[0] = METEOR_RAIN.meteor_rain(defense[0], people[0])
                     print(f'Изменение ресурса - пропитание {monthly_food(team_1)}')
