@@ -16,13 +16,11 @@ def check_food(food):
         print(f'you have {food} food before step')
 
 
-def starve(food, stuff):
+def starve(food, people):
     check_food(food)
-    if stuff * 0.5 > food:
-        print(f'Starvation. You have lack of food. You lost {int(abs(food - stuff * 0.5))} stuff')
-        return [0, int(stuff - abs(food - stuff))]
+    if people * 0.5 > food:
+        print(f'Starvation. You have lack of food. You lost {int(abs(food - people * 0.5))} people')
+        return [0, int(people - abs(food - people))]
     else:
-        return [int(food - stuff * 0.5), stuff]
+        return [int(food - people * 0.5), people]
 
-
-starve(10, 45)
