@@ -12,9 +12,6 @@ def case_if_check():
             case 2:
                 print('There is no meteor danger')
                 case_if_stay_go()
-            # case _:
-            #     print('Неверно введено значение')
-            #     case_if_check()
     else:
         print('The weather is too bad to analise')
         case_if_stay_go()
@@ -25,10 +22,10 @@ def case_if_stay_go():
     match int(input()):
         case 1:
             print('Despite the risk you stayed')
-            return True
+            return 1
         case 2:
             print('You have gone to another place. God protects those who are careful')
-            return False
+            return 2
         case _:
             print('Неверно введено значение')
             case_if_stay_go()
@@ -51,8 +48,7 @@ def aware():
 
 def meteor_rain(defence, stuff):
     aware_ = aware()
-    print()
-    if aware_ == True and int(meteor_chance) == 1:
+    if (aware_ == 1 and int(meteor_chance) == 1) or (aware is None and int(meteor_chance) == 1):
         meteor_damage_chance = random.randint(1, 2)
         if int(meteor_damage_chance) == 1:
             if defence >= 20:
@@ -64,7 +60,7 @@ def meteor_rain(defence, stuff):
         else:
             print('The meteor rain have ran other side. Lucky you')
         return [defence, stuff]
-    elif aware_ == True and int(meteor_chance) == 2:
+    elif (aware_ == 2 and int(meteor_chance) == 2) or (aware_ is None and int(meteor_chance) == 2):
         print(f'You stayed on location, what will be next?')
         return [defence, stuff]
     # elif aware == None and int(meteor_chance) == 1:
