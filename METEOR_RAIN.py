@@ -17,6 +17,7 @@ def case_if_check():
             #     case_if_check()
     else:
         print('The weather is too bad to analise')
+        case_if_stay_go()
 
 
 def case_if_stay_go():

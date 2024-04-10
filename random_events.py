@@ -11,7 +11,7 @@ def sickness(people):
     if result_failure == 1:
         print(ru.DISEASE)
         people -= result_death
-        print(f'мы потеряли {people} людей')
+        print(f'{ru.LOST} {people} {ru.PEOPLES}')
 
 def artifacts(findings, research_tools):
     items = (1, 2, 3, 5, 6, 7, 9)
@@ -21,10 +21,17 @@ def artifacts(findings, research_tools):
         findings += 1
         if result_items == 2:
             research_tools += 30
+            print(ru.FIND_ART, research_tools)
+            print(ru.TOOLS, findings)
         elif result_items == 6:
             research_tools += 20
+            print(ru.TOOLS, research_tools)
+            print(ru.FIND_ART, findings)
         else:
             research_tools += 80
+            print(ru.TOOLS, research_tools)
+            print(ru.FIND_ART, findings)
+
 
 sickness(1000) #Запуск случайного события - болезни
-# artifacts() #Запуск случайного события - ценные артефакты
+artifacts(0, 560) #Запуск случайного события - ценные артефакты
