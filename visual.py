@@ -198,7 +198,8 @@ while running:
                 if count_times == 1:
                     print('Ход второй команды')
                     food[1], people[1] = STARVE.starve(food[1], people[1])
-                    print('За этот месяц во время путешествия произошло несколько событий: ')
+                    # print('За этот месяц во время путешествия произошло несколько событий: ')
+                    defense[1], people[1] = METEOR_RAIN.meteor_rain(defense[1], people[1])
                     alien_invasion(team_2)
                     print(f'Изменение ресурса - пропитание {monthly_food(team_2)}')
                     print('Взаимодействия команд: ')
@@ -211,7 +212,8 @@ while running:
                 if count_times == 2:
                     print('Ход третьей команды')
                     food[2], people[2] = STARVE.starve(food[2], people[2])
-                    print('За этот месяц во время путешествия произошло несколько событий: ')
+                    # print('За этот месяц во время путешествия произошло несколько событий: ')
+                    defense[2], people[2] = METEOR_RAIN.meteor_rain(defense[2], people[2])
                     print(f'Изменение ресурса - пропитание {monthly_food(team_3)}')
                     alien_invasion(team_3)
                     print('Взаимодействия команд: ')
@@ -224,7 +226,8 @@ while running:
                 if count_times == 3:
                     print('Ход четвёртой команды')
                     food[3], people[3] = STARVE.starve(food[3], people[3])
-                    print('За этот месяц во время путешествия произошло несколько событий: ')
+                    # print('За этот месяц во время путешествия произошло несколько событий: ')
+                    defense[3], people[3] = METEOR_RAIN.meteor_rain(defense[3], people[3])
                     print(f'Изменение ресурса - пропитание {monthly_food(team_4)}')
                     alien_invasion(team_4)
                     print('Взаимодействия команд: ')
