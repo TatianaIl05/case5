@@ -156,6 +156,7 @@ def reconcile():
 running = True
 current_team = 1
 count_times = 0
+teams_list = []
 j = 0
 
 while running:
@@ -166,6 +167,15 @@ while running:
     if j > 2:
         running = False
         print('Игра окончена!!!')
+        max_res, team_win = people[0] + food[0] + findings[0] + research_tools[0] + defense[0], 1
+        for z in range(len(people)):
+            teams_list.append(people[z] + food[z] + findings[z] + research_tools[z] + defense[z])
+            if people[z] + food[z] + findings[z] + research_tools[z] + defense[z] > max_res:
+                max_res = people[z] + food[z] + findings[z] + research_tools[z] + defense[z]
+                team_win = z + 1
+        indices = [teams for teams, x in enumerate(teams_list) if x == max_res]
+        for n in indices:
+            print(f'Победившая команда: {n + 1}')
     if 0 in people:
         people[people.index(0)] = 100
     for event in pygame.event.get():
@@ -181,8 +191,9 @@ while running:
             case 1:
                 team_1.do(square_colors[0], trace_colors[0])
                 if count_times == 0:
+                    print()
                     print('Ход первой команды')
-                    # print('За этот месяц во время путешествия произошло несколько событий: ')
+                    print('За этот месяц во время путешествия произошло несколько событий: ')
                     defense[0], people[0] = METEOR_RAIN.meteor_rain(defense[0], people[0])
                     print(f'Изменение ресурса - пропитание {monthly_food(team_1)}')
                     alien_invasion(team_1)
@@ -194,6 +205,7 @@ while running:
             case 2:
                 team_2.do(square_colors[1], trace_colors[1])
                 if count_times == 1:
+                    print()
                     print('Ход второй команды')
                     print('За этот месяц во время путешествия произошло несколько событий: ')
                     alien_invasion(team_2)
@@ -206,6 +218,7 @@ while running:
             case 3:
                 team_3.do(square_colors[2], trace_colors[2])
                 if count_times == 2:
+                    print()
                     print('Ход третьей команды')
                     print('За этот месяц во время путешествия произошло несколько событий: ')
                     print(f'Изменение ресурса - пропитание {monthly_food(team_3)}')
@@ -218,6 +231,7 @@ while running:
             case 4:
                 team_4.do(square_colors[3], trace_colors[3])
                 if count_times == 3:
+                    print()
                     print('Ход четвёртой команды')
                     print('За этот месяц во время путешествия произошло несколько событий: ')
                     print(f'Изменение ресурса - пропитание {monthly_food(team_4)}')
