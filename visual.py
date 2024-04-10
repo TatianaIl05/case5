@@ -99,7 +99,6 @@ def alien_invasion(team):
 
 def monthly_food(team):
     food[players.index(team)] += 1000
-    food[players.index(team)] -= people[players.index(team)]//4
     return food[players.index(team)]
 
 
