@@ -44,5 +44,5 @@ def artifacts(findings, research_tools):
             print(ru.FIND_ART, findings)
 
 
-sickness(1000) #Запуск случайного события - болезни
-artifacts(0, 560) #Запуск случайного события - ценные артефакты
+#sickness(1000) #Запуск случайного события - болезни
+#artifacts(0, 560) #Запуск случайного события - ценные артефакты
