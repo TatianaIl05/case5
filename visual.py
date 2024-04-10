@@ -176,8 +176,9 @@ while running:
         indices = [teams for teams, x in enumerate(teams_list) if x == max_res]
         for n in indices:
             print(f'Победившая команда: {n + 1}')
-    if 0 in people:
-        people[people.index(0)] = 100
+    for team_people in people:
+        if team_people == 0:
+            team_people = 100
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -189,6 +190,7 @@ while running:
                     current_team = 1
         match current_team:
             case 1:
+                people[1] = 0
                 team_1.do(square_colors[0], trace_colors[0])
                 if count_times == 0:
                     print()
