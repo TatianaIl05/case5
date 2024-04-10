@@ -51,8 +51,7 @@ def aware():
 
 def meteor_rain(defence, stuff):
     aware_ = aware()
-    print()
-    if aware_ == True and int(meteor_chance) == 1:
+    if (aware_ and int(meteor_chance) == 1) or (aware is None and int(meteor_chance) == 1):
         meteor_damage_chance = random.randint(1, 2)
         if int(meteor_damage_chance) == 1:
             if defence >= 20:
@@ -64,7 +63,7 @@ def meteor_rain(defence, stuff):
         else:
             print('The meteor rain have ran other side. Lucky you')
         return [defence, stuff]
-    elif aware_ == True and int(meteor_chance) == 2:
+    elif aware_ and int(meteor_chance) == 2 or (aware_ is None and int(meteor_chance) == 2):
         print(f'You stayed on location, what will be next?')
         return [defence, stuff]
     # elif aware == None and int(meteor_chance) == 1:
@@ -73,4 +72,4 @@ def meteor_rain(defence, stuff):
         return [defence, stuff]
 
 
-# meteor_rain(2, 4)
+meteor_rain(2, 4)
