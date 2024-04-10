@@ -99,7 +99,6 @@ def alien_invasion(team):
 
 def monthly_food(team):
     food[players.index(team)] += 1000
-    food[players.index(team)] -= people[players.index(team)]//4
     return food[players.index(team)]
 
 
@@ -185,7 +184,7 @@ while running:
                 team_1.do(square_colors[0], trace_colors[0])
                 if count_times == 0:
                     print('Ход первой команды')
-
+                    food[0], people[0] = STARVE.starve(food[0], people[0])
                     # print('За этот месяц во время путешествия произошло несколько событий: ')
                     defense[0], people[0] = METEOR_RAIN.meteor_rain(defense[0], people[0])
                     print(f'Изменение ресурса - пропитание {monthly_food(team_1)}')
@@ -199,6 +198,7 @@ while running:
                 team_2.do(square_colors[1], trace_colors[1])
                 if count_times == 1:
                     print('Ход второй команды')
+                    food[1], people[1] = STARVE.starve(food[1], people[1])
                     print('За этот месяц во время путешествия произошло несколько событий: ')
                     alien_invasion(team_2)
                     print(f'Изменение ресурса - пропитание {monthly_food(team_2)}')
@@ -211,6 +211,7 @@ while running:
                 team_3.do(square_colors[2], trace_colors[2])
                 if count_times == 2:
                     print('Ход третьей команды')
+                    food[2], people[2] = STARVE.starve(food[2], people[2])
                     print('За этот месяц во время путешествия произошло несколько событий: ')
                     print(f'Изменение ресурса - пропитание {monthly_food(team_3)}')
                     alien_invasion(team_3)
@@ -223,6 +224,7 @@ while running:
                 team_4.do(square_colors[3], trace_colors[3])
                 if count_times == 3:
                     print('Ход четвёртой команды')
+                    food[3], people[3] = STARVE.starve(food[3], people[3])
                     print('За этот месяц во время путешествия произошло несколько событий: ')
                     print(f'Изменение ресурса - пропитание {monthly_food(team_4)}')
                     alien_invasion(team_4)
