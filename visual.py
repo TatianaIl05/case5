@@ -120,11 +120,11 @@ def answer():
     global current_team, j
     for k in range(len(rival_teams)):
         if rival_teams[k] == current_team:
-            if input(f'{ru.APPROVAL_TEAM} {current_team} {ru.BATTLE} {int((k+1) % 4) if (k+1) % 4 != 0 else int((k+5)/(j+1))}').lower() == 'да':
-                print('Противостояние')
+            if input(f'{ru.APPROVAL_TEAM} {current_team} {ru.BATTLE} {int((k+1) % 4) if (k+1) % 4 != 0 else int((k+5)/(j+1))}').lower() == ru.YES_NO:
+                print(ru.FIGHT)
                 battle()
             else:
-                print('Отказ от противостояния')
+                print(ru.NOT_FIGHT)
                 reconcile()
 
 
@@ -132,7 +132,7 @@ def battle():
     global j
     num_ask = randint(1, 100)
     num_accept = randint(1, 100)
-    print(f'Команда, бросившая вызов: {num_ask}, Вторая команда: {num_accept}')
+    print(ru.TEAM_CHELLENGE, num_ask, ru.SECOND_TEAM, num_accept)
     if num_ask > num_accept:
         food[rival_teams.index(current_team) - 4*j] += 0.5*food[current_team - 1]
         food[current_team - 1] *= 0.5
@@ -142,7 +142,7 @@ def battle():
     else:
         food[current_team - 1] += 50
         food[rival_teams.index(current_team) - 4*j] += 50
-    print(f'Ресурсы команд равны: {food[rival_teams.index(current_team) - 4*j]} и {food[current_team - 1]}')
+    print(ru.RESOURCES_EQUAL, food[rival_teams.index(current_team) - 4*j],  food[current_team - 1])
     rival_teams[rival_teams.index(current_team)] = 0
 
 
@@ -150,7 +150,7 @@ def reconcile():
     global j
     food[current_team - 1] *= 0.8
     people[rival_teams.index(current_team) - 4*j] *= 0.8
-    print(f'Ресурсы команд равны: {people[rival_teams.index(current_team) - 4*j]} и {food[current_team - 1]}')
+    print(ru.RESOURCES_EQUAL, people[rival_teams.index(current_team) - 4*j], food[current_team - 1])
     rival_teams[rival_teams.index(current_team)] = 0
 
 
@@ -166,7 +166,7 @@ while running:
     bar_4.draw()
     if j > 2:
         running = False
-        print('Игра окончена!!!')
+        print(ru.GAME_OVER)
     if 0 in people:
         people[people.index(0)] = 100
     for event in pygame.event.get():
@@ -182,13 +182,12 @@ while running:
             case 1:
                 team_1.do(square_colors[0], trace_colors[0])
                 if count_times == 0:
-                    print('Ход первой команды')
+                    print(ru.MOVE1)
                     food[0], people[0] = STARVE.starve(food[0], people[0])
-                    # print('За этот месяц во время путешествия произошло несколько событий: ')
                     defense[0], people[0] = METEOR_RAIN.meteor_rain(defense[0], people[0])
-                    print(f'Изменение ресурса - пропитание {monthly_food(team_1)}')
+                    print(ru.CHANGE_FOOD, monthly_food(team_1))
                     alien_invasion(team_1)
-                    print('Взаимодействия команд: ')
+                    print(ru.INTERACTION_TEAM)
                     answer()
                     question()
                     bar_1.hp = people[0]/100
@@ -196,13 +195,12 @@ while running:
             case 2:
                 team_2.do(square_colors[1], trace_colors[1])
                 if count_times == 1:
-                    print('Ход второй команды')
+                    print(ru.MOVE2)
                     food[1], people[1] = STARVE.starve(food[1], people[1])
-                    # print('За этот месяц во время путешествия произошло несколько событий: ')
                     defense[1], people[1] = METEOR_RAIN.meteor_rain(defense[1], people[1])
                     alien_invasion(team_2)
-                    print(f'Изменение ресурса - пропитание {monthly_food(team_2)}')
-                    print('Взаимодействия команд: ')
+                    print(ru.CHANGE_FOOD, monthly_food(team_2))
+                    print(ru.INTERACTION_TEAM)
                     answer()
                     question()
                     bar_2.hp = people[1] / 100
@@ -210,13 +208,13 @@ while running:
             case 3:
                 team_3.do(square_colors[2], trace_colors[2])
                 if count_times == 2:
-                    print('Ход третьей команды')
+                    print(ru.MOVE3)
                     food[2], people[2] = STARVE.starve(food[2], people[2])
                     # print('За этот месяц во время путешествия произошло несколько событий: ')
                     defense[2], people[2] = METEOR_RAIN.meteor_rain(defense[2], people[2])
-                    print(f'Изменение ресурса - пропитание {monthly_food(team_3)}')
+                    print(ru.CHANGE_FOOD, monthly_food(team_3))
                     alien_invasion(team_3)
-                    print('Взаимодействия команд: ')
+                    print(ru.INTERACTION_TEAM)
                     answer()
                     question()
                     bar_3.hp = people[2] / 100
@@ -224,24 +222,24 @@ while running:
             case 4:
                 team_4.do(square_colors[3], trace_colors[3])
                 if count_times == 3:
-                    print('Ход четвёртой команды')
+                    print(ru.MOVE4)
                     food[3], people[3] = STARVE.starve(food[3], people[3])
                     # print('За этот месяц во время путешествия произошло несколько событий: ')
                     defense[3], people[3] = METEOR_RAIN.meteor_rain(defense[3], people[3])
-                    print(f'Изменение ресурса - пропитание {monthly_food(team_4)}')
+                    print(ru.CHANGE_FOOD, monthly_food(team_4))
                     alien_invasion(team_4)
-                    print('Взаимодействия команд: ')
+                    print(ru.INTERACTION_TEAM)
                     answer()
                     question()
                     bar_4.hp = people[3] / 100
                     count_times = 0
                     resource_table = PrettyTable()
-                    resource_table.add_column('Команды', [1, 2, 3, 4])
-                    resource_table.add_column('Пропитание', food)
-                    resource_table.add_column('Экипаж', people)
-                    resource_table.add_column('Ценные находки', findings)
-                    resource_table.add_column('Средства защиты', defense)
-                    resource_table.add_column('Средства изучения', research_tools)
+                    resource_table.add_column(ru.TEAMS, [1, 2, 3, 4])
+                    resource_table.add_column(ru.FOODS, food)
+                    resource_table.add_column(ru.CREW, people)
+                    resource_table.add_column(ru.ARTEFACTS, findings)
+                    resource_table.add_column(ru.DEFENSE, defense)
+                    resource_table.add_column(ru.TOOLS, research_tools)
                     print(resource_table)
                     j += 1
 
