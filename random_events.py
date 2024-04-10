@@ -4,6 +4,11 @@ findings = 0
 research_tools = 20
 
 def sickness(people):
+    '''
+    This function determines if the team gets sick.
+    :param people:
+    :return:
+    '''
     roulette_death = (200, 30, 80, 120, 5, 300)
     result_death = random.choice(roulette_death)
     roulette_failure = (1, 2)
@@ -14,6 +19,12 @@ def sickness(people):
         print(f'{ru.LOST} {people} {ru.PEOPLES}')
 
 def artifacts(findings, research_tools):
+    '''
+    This function determines whether the team finds a valuable artifact.
+    :param findings:
+    :param research_tools:
+    :return: None
+    '''
     items = (1, 2, 3, 5, 6, 7, 9)
     result_items = random.choice(items)
     if result_items % 2 == 0 or result_items == 3:
