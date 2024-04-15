@@ -1,12 +1,12 @@
 from prettytable import PrettyTable
 import STARVE
+import METEOR_RAIN
 
 food = [10000, 10000, 10000, 10000]
 people = [7000, 7000, 7000, 7000]
 attack = [100, 100, 100, 100]
-# usage = [people[0] * 0.5, people[1]*0.5, people[2]*0.5, people[3]*0.5]
-usage = [3500, 3500, 3500, 3500]
-defense = [50, 50, 50, 50]
+usage = [people[0] * 0.5, people[1]*0.5, people[2]*0.5, people[3]*0.5]
+defense = [5000, 5000, 5000, 5000]
 
 
 def start_info():
@@ -19,8 +19,9 @@ def start_info():
     print(table)
 
 
-for step in range(4):
-    for team in range(1):
+for step in range(7):
+    for team in range(4):
         start_info()
+        people[team], defense[team] = METEOR_RAIN.meteor_rain(defense[team], food[team])
 
 
