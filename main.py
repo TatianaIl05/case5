@@ -22,6 +22,6 @@ def start_info():
 for step in range(7):
     for team in range(4):
         start_info()
-        people[team], defense[team] = METEOR_RAIN.meteor_rain(defense[team], food[team])
+        people[team], defense[team] = METEOR_RAIN.meteor_rain(people[team], defense[team])
 
 
