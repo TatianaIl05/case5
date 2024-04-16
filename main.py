@@ -2,7 +2,6 @@ from prettytable import PrettyTable
 from random import randint
 import STARVE
 import METEOR_RAIN
-import CHECK
 import case
 import random_events as ran
 import ru_local as ru
