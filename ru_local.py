@@ -48,7 +48,7 @@ DEFENSES = 'Защита'
 ATTACK = 'Атака'
 CONSUMPTION = 'Потребление'
 FINDINGS = 'Артефакты'
-
+SEARCH_RESULT = 'Команда не смогла найти артефакты.'
 MOTION = 'Ход'
 TEAM_NUMBER = 'команды'
 WIN_TEAM = 'Победила команда'
