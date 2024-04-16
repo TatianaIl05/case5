@@ -83,7 +83,7 @@ def reconcile():
     rival_teams[rival_teams.index(team)] = 0
 
 
-for step in range(4):
+for step in range(1):
     for team in range(1, 4 + 1):
         print(f'\n Ход {step + 1} команды {team}')
         people[team - 1], defense[team - 1] = METEOR_RAIN.meteor_rain(people[team - 1], defense[team - 1])
