@@ -19,7 +19,7 @@ research_tools = [20, 20, 20, 20]
 
 
 def start_info():
-    food[team-1], people[team-1], usage[team-1] = STARVE.starve(food[team-1], people[team-1], usage[team-1])
+    food[team], people[team], usage[team] = STARVE.starve(food[team], people[team], usage[team])
     print('Данные на начало хода: ')
     table_columns = ['Люди', 'Еда', 'Защита', 'Атака', 'Потребление']
     table = PrettyTable(table_columns)
