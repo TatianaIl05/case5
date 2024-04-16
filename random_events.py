@@ -1,7 +1,7 @@
 import ru_local as ru
 import random
-findings = 0
-research_tools = 20
+#findings = 0
+#research_tools = 20
 
 '''def sickness(people):
     
@@ -59,7 +59,7 @@ def sickness(people):
     result_failure = random.choice(roulette_failure)
     if result_failure == 1:
         print(ru.DISEASE)
-        people[0] -= result_death
+        people -= result_death
         print(f'{ru.LOST} {people} {ru.PEOPLES}')
     else:
         print('Вы смогли избежать эпидемии!')
@@ -74,22 +74,19 @@ def artifacts(findings, research_tools):
     items = (1, 2, 4, 3, 6, 7, 9)
     result_items = random.choice(items)
     if result_items % 2 == 0 or result_items == 3:
-        print('---------------------')
         print(ru.ARTEFACT)
-        findings[0] += 1
+        findings += 1
         if result_items == 2:
-            research_tools[0] += 30
+            research_tools += 30
             print(ru.TOOLS, research_tools)
             print(ru.FIND_ART, findings)
         elif result_items == 6:
-            research_tools[0] += 20
+            research_tools += 20
             print(ru.TOOLS, research_tools)
             print(ru.FIND_ART, findings)
         else:
-            research_tools[0] += 80
+            research_tools += 80
             print(ru.TOOLS, research_tools)
             print(ru.FIND_ART, findings)
     else:
-        print('---------------------')
-        print(result_items)
         print('Команда не смогла найти артефакты')
