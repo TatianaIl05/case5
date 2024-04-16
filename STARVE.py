@@ -17,7 +17,13 @@
 
 
 def starve(food, people, usage):
-    # check_food(food)
+    '''
+    This function declares hunger when the food value of the team is low.
+    :param food:
+    :param people:
+    :param usage:
+    :return: [food - usage, people, people * 0.5]
+    '''
     if usage > food:
         print(f'Голод. Вам не хватает еды. Вы потеряли {int(abs(food - usage))} людей')
         return [0, people - abs(food - usage), (people - abs(food - usage)) * 0.5]

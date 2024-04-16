@@ -1,6 +1,11 @@
 import random
-
 def meteor_rain(people, defense):
+    '''
+    This function triggers a random event in the form of a meteorite impact.
+    :param people:
+    :param defense:
+    :return: people, defense
+    '''
     meteor_chance = random.randint(1, 3)
     if meteor_chance == 1:
         if defense < 2000:

@@ -1,4 +1,15 @@
 def case(people, ar, attack, defense, food, flag=None):
+    '''
+    This function offers the team a choice of action
+    in its turn. From a random event to non-random ones.
+    :param people:
+    :param ar:
+    :param attack:
+    :param defense:
+    :param food:
+    :param flag:
+    :return: None
+    '''
     print('Что будем делать?', '\n' '1. улучшить атаку', '\n' '2. улучшить защиту', '\n' '3. Исследовать территорию', '\n' '4. Купить еду')
     var = int(input())
     match var:

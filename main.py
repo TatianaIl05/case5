@@ -1,4 +1,4 @@
-from prettytable import PrettyTable
+#from prettytable import PrettyTable
 from random import randint
 import STARVE
 import METEOR_RAIN
@@ -20,19 +20,27 @@ findings = [0, 0, 0, 0]
 
 
 def start_info():
+    '''
+    This function outputs the initial data of the round.
+    :return: None
+    '''
     food[team - 1], people[team - 1], usage[team - 1] = STARVE.starve(food[team - 1], people[team - 1], usage[team - 1])
     print('Данные на начало хода: ')
-    table_columns = ['Люди', 'Еда', 'Защита', 'Атака', 'Потребление', 'Артефакты']
-    table = PrettyTable(table_columns)
-    table.add_row(
-        [people[team - 1], food[team - 1], defense[team - 1], attack[team - 1], usage[team - 1], findings[team - 1]])
-    print(table)
+    #table_columns = ['Люди', 'Еда', 'Защита', 'Атака', 'Потребление', 'Артефакты']
+    #table = PrettyTable(table_columns)
+    #table.add_row(
+     #   [people[team - 1], food[team - 1], defense[team - 1], attack[team - 1], usage[team - 1], findings[team - 1]])
+    #print(table)
 
 
 rival_teams = [0] * 12
 
 
 def question():
+    '''
+    This function offers a command to challenge another team to a duel.
+    :return: None
+    '''
     global team, step
     if input(ru.DESIRE_CHALLENGE).lower() == ru.YES_NO:
         compete_team = int(input(ru.NUM_TEAM))
@@ -44,6 +52,10 @@ def question():
 
 
 def answer():
+    '''
+    This feature prompts a team to accept a challenge to a fight from another team.
+    :return: None
+    '''
     global team, step
     for k in range(len(rival_teams)):
         if rival_teams[k] == team:
@@ -57,6 +69,10 @@ def answer():
 
 
 def battle():
+    '''
+    This function determines the result of the match between the teams.
+    :return: None
+    '''
     global step
     num_ask = randint(1, 100)
     num_accept = randint(1, 100)
@@ -75,6 +91,10 @@ def battle():
 
 
 def reconcile():
+    '''
+    This function determines the result of the truce of the teams.
+    :return: None
+    '''
     global step
     food[team - 1] *= 0.8
     people[rival_teams.index(team) - 4 * step] *= 0.8
