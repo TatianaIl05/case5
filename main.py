@@ -89,3 +89,5 @@ for step in range(3):
         ran.artifacts(findings[team - 1], research_tools[team - 1])
         people[team - 1], ar[team - 1], defense[team - 1], flag = case.case(people[team - 1], ar[team - 1], attack[team - 1], defense[team - 1], flag=None)
         attack[team - 1] = int(people[team - 1] * 0.3 * ar[team - 1])
+        answer()
+        question()
