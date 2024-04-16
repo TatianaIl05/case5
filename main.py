@@ -25,7 +25,8 @@ def start_info():
     print('Данные на начало хода: ')
     table_columns = ['Люди', 'Еда', 'Защита', 'Атака', 'Потребление', 'Артефакты']
     table = PrettyTable(table_columns)
-    table.add_row([people[team], food[team], defense[team], attack[team], usage[team], findings[team]])
+    table.add_row(
+        [people[team - 1], food[team - 1], defense[team - 1], attack[team - 1], usage[team - 1], findings[team - 1]])
     print(table)
 
 
