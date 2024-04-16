@@ -1,4 +1,4 @@
-#from prettytable import PrettyTable
+from prettytable import PrettyTable
 from random import randint
 import STARVE
 import METEOR_RAIN
@@ -22,9 +22,9 @@ def start_info():
     food[team-1], people[team-1], usage[team-1] = STARVE.starve(food[team-1], people[team-1], usage[team-1])
     print('Данные на начало хода: ')
     table_columns = ['Люди', 'Еда', 'Защита', 'Атака', 'Потребление']
-   # table = PrettyTable(table_columns)
-   # table.add_row([people[team], food[team], defense[team], attack[team], usage[team]])
-   # print(table)
+    table = PrettyTable(table_columns)
+    table.add_row([people[team], food[team], defense[team], attack[team], usage[team]])
+    print(table)
 
 
 rival_teams = [0] * 12
