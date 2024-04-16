@@ -1,4 +1,4 @@
-#from prettytable import PrettyTable
+from prettytable import PrettyTable
 from random import randint
 import STARVE
 import METEOR_RAIN
@@ -15,22 +15,18 @@ usage = [people[0] * 0.5, people[1] * 0.5, people[2] * 0.5, people[3] * 0.5]
 defense = [5000, 5000, 5000, 5000]
 findings = [0, 0, 0, 0]
 
-
-# research_tools = [20, 20, 20, 20]
-
-
 def start_info():
     '''
     This function outputs the initial data of the round.
     :return: None
     '''
     food[team - 1], people[team - 1], usage[team - 1] = STARVE.starve(food[team - 1], people[team - 1], usage[team - 1])
-    print('Данные на начало хода: ')
-    #table_columns = ['Люди', 'Еда', 'Защита', 'Атака', 'Потребление', 'Артефакты']
-    #table = PrettyTable(table_columns)
-    #table.add_row(
-     #   [people[team - 1], food[team - 1], defense[team - 1], attack[team - 1], usage[team - 1], findings[team - 1]])
-    #print(table)
+    print(ru.START_DATA)
+    table_columns = [ru.PEOPLES_TABLE, ru.FOOD, ru.DEFENSES, ru.ATTACK, ru.CONSUMPTION, ru.FINDINGS]
+    table = PrettyTable(table_columns)
+    table.add_row(
+        [people[team - 1], food[team - 1], defense[team - 1], attack[team - 1], usage[team - 1], findings[team - 1]])
+    print(table)
 
 
 rival_teams = [0] * 12
@@ -104,7 +100,7 @@ def reconcile():
 
 for step in range(1):
     for team in range(1, 4 + 1):
-        print(f'\n Ход {step + 1} команды {team}')
+        print(f'\n {ru.MOTION} {step + 1} {ru.TEAM_NUMBER} {team}')
         people[team - 1], defense[team - 1] = METEOR_RAIN.meteor_rain(people[team - 1], defense[team - 1])
         start_info()
         ran.sickness(people[team - 1])
@@ -114,7 +110,7 @@ for step in range(1):
                                                                                             defense[team - 1],
                                                                                             food[team - 1],
                                                                                             flag=None)
-        if flag == 'red':
+        if flag == ru.RED:
             findings[team - 1] = ran.artifacts(findings[team - 1])
         attack[team - 1] = int(people[team - 1] * 0.3 * ar[team - 1])
         answer()
@@ -123,4 +119,4 @@ for step in range(1):
 sum_ = [0, 0, 0, 0]
 for team in range(1, 4 + 1):
     sum_[team - 1] = food[team - 1] + people[team - 1] + defense[team - 1] + (findings[team - 1] * 2000)
-print(f'Победила команда {sum_.index(max(sum_)) + 1} со счетом {max(sum_)}')
+print(f'{ru.WIN_TEAM} {sum_.index(max(sum_)) + 1} {ru.ACCOUNT} {max(sum_)}')
