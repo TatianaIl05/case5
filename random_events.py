@@ -79,7 +79,7 @@ def artifacts(findings):
         print(ru.ARTEFACT)
         findings += 1
     elif result_items == 3:
-        print(ru.ARTEFACT)
+        print(ru.ARTEFACT3)
         findings += 3
     else:
         print('Команда не смогла найти артефакты')
