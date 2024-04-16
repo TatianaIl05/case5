@@ -4,7 +4,7 @@ from prettytable import PrettyTable
 import ru_local as ru
 import METEOR_RAIN
 import STARVE
-import random_events
+import random_events as ran
 
 food = [14000, 14000, 14000, 14000]
 people = [7000, 7000, 7000, 7000]
@@ -186,6 +186,8 @@ while running:
                     food[0], people[0] = STARVE.starve(food[0], people[0])
                     defense[0], people[0] = METEOR_RAIN.meteor_rain(defense[0], people[0])
                     print(ru.CHANGE_FOOD, monthly_food(team_1))
+                    ran.artifacts(findings[0], research_tools[0])
+                    ran.sickness(people[0])
                     alien_invasion(team_1)
                     print(ru.INTERACTION_TEAM)
                     answer()
@@ -198,6 +200,8 @@ while running:
                     print(ru.MOVE2)
                     food[1], people[1] = STARVE.starve(food[1], people[1])
                     defense[1], people[1] = METEOR_RAIN.meteor_rain(defense[1], people[1])
+                    ran.artifacts(findings[1], research_tools[1])
+                    ran.sickness(people[1])
                     alien_invasion(team_2)
                     print(ru.CHANGE_FOOD, monthly_food(team_2))
                     print(ru.INTERACTION_TEAM)
@@ -210,9 +214,10 @@ while running:
                 if count_times == 2:
                     print(ru.MOVE3)
                     food[2], people[2] = STARVE.starve(food[2], people[2])
-                    # print('За этот месяц во время путешествия произошло несколько событий: ')
                     defense[2], people[2] = METEOR_RAIN.meteor_rain(defense[2], people[2])
                     print(ru.CHANGE_FOOD, monthly_food(team_3))
+                    ran.artifacts(findings[2], research_tools[2])
+                    ran.sickness(people[2])
                     alien_invasion(team_3)
                     print(ru.INTERACTION_TEAM)
                     answer()
@@ -224,9 +229,10 @@ while running:
                 if count_times == 3:
                     print(ru.MOVE4)
                     food[3], people[3] = STARVE.starve(food[3], people[3])
-                    # print('За этот месяц во время путешествия произошло несколько событий: ')
                     defense[3], people[3] = METEOR_RAIN.meteor_rain(defense[3], people[3])
                     print(ru.CHANGE_FOOD, monthly_food(team_4))
+                    ran.artifacts(findings[3], research_tools[3])
+                    ran.sickness(people[3])
                     alien_invasion(team_4)
                     print(ru.INTERACTION_TEAM)
                     answer()
