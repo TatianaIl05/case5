@@ -88,4 +88,5 @@ def artifacts(findings):
             print(ru.FIND_ART, findings)'''
     else:
         print('Команда не смогла найти артефакты')
+    return findings
 
