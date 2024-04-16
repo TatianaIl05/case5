@@ -14,7 +14,7 @@ def case(people, ar, attack, defense, food, flag=None):
             flag = 'red'
             return [people, ar, defense, food, flag]
         case 4:
-            print(f'Вы купили еду. Теперь у вас {food + 800}')
+            print(f'Вы купили еду. Теперь у вас {food + 8000}')
             return [people, ar, defense, food + 8000, flag]
         case _:
             print('Неверное значение')
