@@ -89,10 +89,12 @@ for step in range(4):
         people[team - 1], defense[team - 1] = METEOR_RAIN.meteor_rain(people[team - 1], defense[team - 1])
         start_info()
         ran.sickness(people[team - 1])
-        # ran.artifacts(findings[team - 1])
-        people[team - 1], ar[team - 1], defense[team - 1], flag = case.case(people[team - 1], ar[team - 1],
-                                                                            attack[team - 1], defense[team - 1],
-                                                                            flag=None)
+        people[team - 1], ar[team - 1], defense[team - 1], food[team - 1], flag = case.case(people[team - 1],
+                                                                                            ar[team - 1],
+                                                                                            attack[team - 1],
+                                                                                            defense[team - 1],
+                                                                                            food[team - 1],
+                                                                                            flag=None)
         if flag == 'red':
             findings[team - 1] = ran.artifacts(findings[team - 1])
         attack[team - 1] = int(people[team - 1] * 0.3 * ar[team - 1])
@@ -101,5 +103,5 @@ for step in range(4):
 
 sum_ = [0, 0, 0, 0]
 for team in range(1, 4 + 1):
-    sum_[team - 1] = food[team - 1] + people[team - 1] + defense[team - 1] + findings[team - 1] * 500
+    sum_[team - 1] = food[team - 1] + people[team - 1] + defense[team - 1] + (findings[team - 1] * 2000)
 print(f'Победила команда {sum_.index(max(sum_)) + 1} со счетом {max(sum_)}')
