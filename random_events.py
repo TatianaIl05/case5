@@ -73,7 +73,7 @@ def artifacts(findings):
     :param research_tools: number of research tools
     :return: None
     '''
-    items = (1, 2, 4, 3, 6, 7, 9)
+    items = (1, 2, 4, 3, 6, 8, 9)
     result_items = random.choice(items)
     if result_items % 2 == 0:
         print(ru.ARTEFACT)
