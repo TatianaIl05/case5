@@ -15,6 +15,8 @@ attack = [int(people[0] * 0.3) * ar[0], int(people[1] * 0.3) * ar[1], int(people
 usage = [people[0] * 0.5, people[1] * 0.5, people[2] * 0.5, people[3] * 0.5]
 defense = [5000, 5000, 5000, 5000]
 findings = [0, 0, 0, 0]
+
+
 # research_tools = [20, 20, 20, 20]
 
 
@@ -96,7 +98,7 @@ for step in range(4):
         answer()
         question()
 
-sum_  =[0, 0, 0, 0]
+sum_ = [0, 0, 0, 0]
 for team in range(1, 4 + 1):
     sum_[team - 1] = food[team - 1] + people[team - 1] + defense[team - 1] + findings[team - 1] * 500
 print(f'Победила команда {sum_.index(max(sum_)) + 1} со счетом {max(sum_)}')
