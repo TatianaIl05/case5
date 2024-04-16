@@ -53,3 +53,22 @@ def answer_union():
             people[current_team - 1] -= 400
             # return ['w', people[current_team - 1]]
 answer_union()
+
+def battle1():
+    global step, compete_team
+    print(attack[team-1])
+    print(defense[compete_team - 1])
+    if attack[compete_team - 1] > defense[rival_teams.index(team) - 4*step]:
+        food[rival_teams.index(team) - 4*step] += 0.5 * food[team - 1]
+        food[team - 1] *= 0.5
+        print(f'Команда {compete_team} выиграла!')
+    elif attack[rival_teams.index(team) - 1] > defense[compete_team - 1]:
+        food[team - 1] += 0.5 * food[rival_teams.index(team) - 4*step]
+        food[rival_teams.index(team) - 4*step] *= 0.5
+        print(f'Команда {rival_teams[team]} выиграла!')
+    elif attack[compete_team - 1] == defense[rival_teams.index(team) - 4*step] and attack[rival_teams.index(team) - 1] == defense[compete_team - 1]:
+        food[team - 1] += 50
+        food[rival_teams.index(team) - 4*step] += 50
+    print(ru.RESOURCES_EQUAL, food[rival_teams.index(team) - 4*step], food[team - 1])
+    rival_teams[rival_teams.index(team)] = 0
+
