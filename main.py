@@ -86,12 +86,12 @@ for step in range(4):
         people[team - 1], defense[team - 1] = METEOR_RAIN.meteor_rain(people[team - 1], defense[team - 1])
         start_info()
         ran.sickness(people[team - 1])
-        ran.artifacts(findings[team - 1])
+        # ran.artifacts(findings[team - 1])
         people[team - 1], ar[team - 1], defense[team - 1], flag = case.case(people[team - 1], ar[team - 1],
                                                                             attack[team - 1], defense[team - 1],
                                                                             flag=None)
         if flag == 'red':
-            ran.artifacts(findings[team - 1])
+            findings[team - 1] = ran.artifacts(findings[team - 1])
         attack[team - 1] = int(people[team - 1] * 0.3 * ar[team - 1])
         answer()
         question()
