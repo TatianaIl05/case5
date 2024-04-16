@@ -14,7 +14,7 @@
 #     ans = rep_func(var, 1, 2)
 #     if ans:
 #         print(f'you have {food} food before step')
-
+import ru_local
 
 def starve(food, people, usage):
     '''
@@ -25,7 +25,7 @@ def starve(food, people, usage):
     :return: [food - usage, people, people * 0.5]
     '''
     if usage > food:
-        print(f'Голод. Вам не хватает еды. Вы потеряли {int(abs(food - usage))} людей')
+        print(f'{ru_local.HUNGER} {int(abs(food - usage))} {ru_local.PEOPLES}')
         return [0, people - abs(food - usage), (people - abs(food - usage)) * 0.5]
     else:
         return [food - usage, people, people * 0.5]
