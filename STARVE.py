@@ -19,7 +19,7 @@
 def starve(food, people, usage):
     # check_food(food)
     if usage > food:
-        print(f'Starvation. You have lack of food. You lost {int(abs(food - usage))} people')
+        print(f'Голод. Вам не хватает еды. Вы потеряли {int(abs(food - usage))} людей')
         return [0, people - abs(food - usage), (people - abs(food - usage)) * 0.5]
     else:
         return [food - usage, people, people * 0.5]
