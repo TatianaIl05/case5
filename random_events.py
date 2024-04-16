@@ -61,10 +61,8 @@ def sickness(people):
         print(ru.DISEASE)
         people -= result_death
         print(f'{ru.LOST} {people} {ru.PEOPLES}')
-    else:
-        print('Вы смогли избежать эпидемии!')
 
-def artifacts(findings, research_tools):
+def artifacts(findings):
     '''
     This function determines whether the team finds a valuable artifact.
     :param findings: number of valuable artefacts
@@ -76,7 +74,7 @@ def artifacts(findings, research_tools):
     if result_items % 2 == 0 or result_items == 3:
         print(ru.ARTEFACT)
         findings += 1
-        if result_items == 2:
+        '''if result_items == 2:
             research_tools += 30
             print(ru.TOOLS, research_tools)
             print(ru.FIND_ART, findings)
@@ -87,6 +85,6 @@ def artifacts(findings, research_tools):
         else:
             research_tools += 80
             print(ru.TOOLS, research_tools)
-            print(ru.FIND_ART, findings)
-    else:
-        print('Команда не смогла найти артефакты')
+            print(ru.FIND_ART, findings)'''
+    '''else:
+        print('Команда не смогла найти артефакты')'''

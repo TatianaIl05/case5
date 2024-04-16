@@ -15,7 +15,7 @@ attack = [int(people[0] * 0.3) * ar[0], int(people[1] * 0.3) * ar[1], int(people
 usage = [people[0] * 0.5, people[1] * 0.5, people[2] * 0.5, people[3] * 0.5]
 defense = [5000, 5000, 5000, 5000]
 findings = [0, 0, 0, 0]
-research_tools = [20, 20, 20, 20]
+#research_tools = [20, 20, 20, 20]
 
 
 def start_info():
@@ -71,7 +71,6 @@ def battle():
     print(ru.RESOURCES_EQUAL, food[rival_teams.index(team) - 4*step],  food[team - 1])
     rival_teams[rival_teams.index(team)] = 0
 
-
 def reconcile():
     global step
     food[team - 1] *= 0.8
@@ -83,11 +82,14 @@ def reconcile():
 for step in range(3):
     for team in range(1, 4 + 1):
         print(f'\n Ход {step + 1} команды {team}')
-        people[team - 1], defense[team - 1] = METEOR_RAIN.meteor_rain(people[team - 1], defense[team - 1])
         start_info()
+        people[team - 1], defense[team - 1] = METEOR_RAIN.meteor_rain(people[team - 1], defense[team - 1])
         ran.sickness(people[team - 1])
-        ran.artifacts(findings[team - 1], research_tools[team - 1])
-        people[team - 1], ar[team - 1], defense[team - 1], flag = case.case(people[team - 1], ar[team - 1], attack[team - 1], defense[team - 1], flag=None)
-        attack[team - 1] = int(people[team - 1] * 0.3 * ar[team - 1])
-        answer()
-        question()
+        ran.artifacts(findings[team - 1])
+        #people[team - 1], ar[team - 1], defense[team - 1], flag = case.case(people[team - 1], ar[team - 1], attack[team - 1], defense[team - 1], flag=None)
+        #attack[team - 1] = int(people[team - 1] * 0.3 * ar[team - 1])
+        if step != 2:
+            answer()
+            question()
+        else:
+            answer()
