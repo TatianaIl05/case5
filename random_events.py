@@ -86,5 +86,6 @@ def artifacts(findings):
             research_tools += 80
             print(ru.TOOLS, research_tools)
             print(ru.FIND_ART, findings)'''
-    '''else:
-        print('Команда не смогла найти артефакты')'''
+    else:
+        print('Команда не смогла найти артефакты')
+
