@@ -1,3 +1,4 @@
+import ru_local as ru
 def case(people, ar, attack, defense, food, flag=None):
     '''
     This function offers the team a choice of action
@@ -10,23 +11,23 @@ def case(people, ar, attack, defense, food, flag=None):
     :param flag:
     :return: None
     '''
-    print('Что будем делать?', '\n' '1. улучшить атаку', '\n' '2. улучшить защиту', '\n' '3. Исследовать территорию', '\n' '4. Купить еду')
+    print(f'{ru.CHOOSING_ACTION} \ {ru.CHOICE_ATTACK} \ {ru.CHOICE_DEFENSE} \ {ru.CHOICE_LOCATION} \ {ru.CHOICE_FOOD}')
     var = int(input())
     match var:
         case 1:
             ar += 0.3
-            print(f'Вы улучшили атаку. Теперь она {attack * ar}')
+            print(f'{ru.UPGRADE_ATTACK} {attack * ar}')
             return [people, ar, defense, food, flag, ]
         case 2:
             defense += 200
-            print(f'Вы улучшили защиту. Теперь она {defense}')
+            print(f'{ru.UPGRADE_DEFENSE} {defense}')
             return [people, ar, defense, food, flag]
         case 3:
-            flag = 'red'
+            flag = ru.RED
             return [people, ar, defense, food, flag]
         case 4:
-            print(f'Вы купили еду. Теперь у вас {food + 6000} еды')
+            print(f'{ru.UPGRADE_FOOD} {food + 6000} {ru.FOOD1}')
             return [people, ar, defense, food + 6000, flag]
         case _:
-            print('Неверное значение')
+            print(ru.MISTAKE)
             case()
