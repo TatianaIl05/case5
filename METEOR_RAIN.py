@@ -1,6 +1,7 @@
 import random
 import ru_local
 
+
 def meteor_rain(people, defense):
     '''
     This function triggers a random event in the form of a meteorite impact.

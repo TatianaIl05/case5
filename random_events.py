@@ -1,6 +1,7 @@
 import ru_local as ru
 import random
 
+
 def sickness(people):
     '''
     This function determines if the team gets sick.
@@ -21,7 +22,6 @@ def artifacts(findings):
     '''
     This function determines whether the team finds a valuable artifact.
     :param findings: number of valuable artefacts
-    :param research_tools: number of research tools
     :return: None
     '''
     items = (1, 2, 4, 3, 6, 8, 9)
