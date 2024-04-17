@@ -11,7 +11,7 @@ def case(people, ar, attack, defense, food, flag=None):
     :param flag:
     :return: None
     '''
-    print(f'{ru.CHOOSING_ACTION} \ {ru.CHOICE_ATTACK} \ {ru.CHOICE_DEFENSE} \ {ru.CHOICE_LOCATION} \ {ru.CHOICE_FOOD}')
+    print(f'{ru.CHOOSING_ACTION} \n {ru.CHOICE_ATTACK} \n {ru.CHOICE_DEFENSE} \n {ru.CHOICE_LOCATION} \n {ru.CHOICE_FOOD}')
     var = int(input())
     match var:
         case 1:
