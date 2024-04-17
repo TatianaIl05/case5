@@ -81,7 +81,7 @@ def battle():
     This function determines the result of the match between the teams.
     :return: None
     '''
-    if attack[team - 1] == attack[rivals[0] - 1]:
+    if int(attack[team - 1]) == int(attack[rivals[0] - 1]):
         food[team - 1] += 50
         food[rivals[0] - 1] += 50
         print(ru.DRAW)
