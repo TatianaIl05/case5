@@ -17,6 +17,7 @@ findings = [0, 0, 0, 0]
 rival_teams = {1: 0, 2: 0, 3: 0, 4: 0}
 rivals = []
 
+
 def start_info():
     '''
     This function outputs the initial data of the round.
@@ -121,12 +122,8 @@ for step in range(3):
         people[team - 1], defense[team - 1] = METEOR_RAIN.meteor_rain(people[team - 1], defense[team - 1])
         ran.sickness(people[team - 1])
         alien_invasion(team)
-        people[team - 1], ar[team - 1], defense[team - 1], food[team - 1], flag = case.case(people[team - 1],
-                                                                                            ar[team - 1],
-                                                                                            attack[team - 1],
-                                                                                            defense[team - 1],
-                                                                                            food[team - 1],
-                                                                                            flag=0)
+        people[team - 1], ar[team - 1], attack[team - 1], defense[team - 1], food[team - 1], flag = (
+            case.case(people[team - 1], ar[team - 1], attack[team - 1], defense[team - 1], food[team - 1], flag=None))
         if flag == ru.RED:
             findings[team - 1] = ran.artifacts(findings[team - 1])
         attack[team - 1] = int(people[team - 1] * 0.3 * ar[team - 1])
