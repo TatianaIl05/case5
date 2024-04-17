@@ -14,8 +14,8 @@ attack = [int(people[0] * 0.3) * ar[0], int(people[1] * 0.3) * ar[1], int(people
 usage = [people[0] * 0.5, people[1] * 0.5, people[2] * 0.5, people[3] * 0.5]
 defense = [5000, 5000, 5000, 5000]
 findings = [0, 0, 0, 0]
-rival_teams = [0] * 12
-
+rival_teams = {1: 0, 2: 0, 3: 0, 4: 0}
+rivals = []
 
 def start_info():
     '''
@@ -46,13 +46,13 @@ def question():
     This function offers a command to challenge another team to a duel.
     :return: None
     '''
-    global team, step
+    global team
     if input(ru.DESIRE_CHALLENGE).lower() == ru.YES_NO:
         compete_team = int(input(ru.NUM_TEAM))
         while compete_team == team or compete_team > 4:
             print(ru.VALUE_ERROR)
             compete_team = int(input(ru.OTHER_VALUE))
-        rival_teams[team - 1 + 4 * step] = compete_team
+        rival_teams[team] = compete_team
         print(ru.TEAM, team, ru.CHALLENGED, compete_team)
 
 
@@ -61,16 +61,19 @@ def answer():
     This feature prompts a team to accept a challenge to a fight from another team.
     :return: None
     '''
-    global team, step
-    for k in range(len(rival_teams)):
+    global team
+    for k in range(1, 4 + 1):
         if rival_teams[k] == team:
+            rivals.append(k)
             if input(f'{ru.APPROVAL_TEAM} {team} {ru.BATTLE} '
-                     f'{int((k + 1) % 4) if (k + 1) % 4 != 0 else 4}? ').lower() == ru.YES_NO:
+                     f'{k % 4 if k % 4 != 0 else 4}? ').lower() == ru.YES_NO:
                 print(ru.FIGHT)
                 battle()
             else:
                 print(ru.NOT_FIGHT)
                 reconcile()
+            rivals.pop(0)
+            rival_teams[k] = 0
 
 
 def battle():
@@ -78,27 +81,26 @@ def battle():
     This function determines the result of the match between the teams.
     :return: None
     '''
-    if attack[team - 1] == attack[rival_teams.index(team) - 4 * step]:
+    if attack[team - 1] == attack[rivals[0] - 1]:
         food[team - 1] += 50
-        food[rival_teams.index(team) - 4 * step] += 50
+        food[rivals[0] - 1] += 50
         print(ru.DRAW)
-    elif attack[team - 1] > attack[rival_teams.index(team) - 4 * step]:
-        food[team - 1] += 0.5 * food[rival_teams.index(team) - 4 * step]
-        food[rival_teams.index(team) - 4 * step] *= 0.5
-        findings[team - 1] += findings[rival_teams.index(team) - 4 * step]
-        findings[rival_teams.index(team) - 4 * step] = 0
+    elif attack[team - 1] > attack[rivals[0] - 1]:
+        food[team - 1] += 0.5 * food[rivals[0] - 1]
+        food[rivals[0] - 1] *= 0.5
+        findings[team - 1] += findings[rivals[0] - 1]
+        findings[rivals[0] - 1] = 0
         team_win = team
-        print(ru.TWO_FIGHT_WINNER, food[team_win - 1], findings[team_win - 1])
+        print(ru.TWO_FIGHT_WINNER, team_win, ru.RES_COM, food[team_win - 1], findings[team_win - 1])
     else:
-        food[rival_teams.index(team) - 4 * step] += 0.5 * food[team - 1]
+        food[rivals[0] - 1] += 0.5 * food[team - 1]
         food[team - 1] *= 0.5
-        findings[rival_teams.index(team) - 4 * step] += findings[team - 1]
+        findings[rivals[0] - 1] += findings[team - 1]
         findings[team - 1] = 0
-        team_win = rival_teams.index(team) - 4 * step + 1
-        print(ru.TWO_FIGHT_WINNER, food[team_win - 1], findings[team_win - 1])
-    print(ru.RESOURCES_EQUAL, ru.FOODS, food[rival_teams.index(team) - 4 * step], food[team - 1],
-          ru.ARTEFACTS, findings[rival_teams.index(team) - 4 * step],  findings[team - 1])
-    rival_teams[rival_teams.index(team)] = 0
+        team_win = rivals[0]
+        print(ru.TWO_FIGHT_WINNER, team_win, ru.RES_COM, food[team_win - 1], findings[team_win - 1])
+    print(ru.RESOURCES_EQUAL, ru.FOODS, food[rivals[0] - 1], food[team - 1],
+          ru.ARTEFACTS, findings[rivals[0] - 1],  findings[team - 1])
 
 
 def reconcile():
@@ -108,9 +110,8 @@ def reconcile():
     '''
     global step
     food[team - 1] *= 0.8
-    people[rival_teams.index(team) - 4 * step] *= 0.8
-    print(ru.RESOURCES_EQUAL, ru.COMMENT, people[rival_teams.index(team) - 4 * step], food[team - 1])
-    rival_teams[rival_teams.index(team)] = 0
+    people[rivals[0] - 1] *= 0.8
+    print(ru.RESOURCES_EQUAL, ru.COMMENT, people[rivals[0] - 1], food[team - 1])
 
 
 for step in range(3):
