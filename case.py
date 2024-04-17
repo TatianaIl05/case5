@@ -30,4 +30,4 @@ def case(people, ar, attack, defense, food, flag=None):
             return [people, ar, defense, food + 6000, flag]
         case _:
             print(ru.MISTAKE)
-            case()
+            case(people, ar, attack, defense, food, flag=None)
