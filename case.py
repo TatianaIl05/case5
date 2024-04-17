@@ -1,4 +1,6 @@
 import ru_local as ru
+
+
 def case(people, ar, attack, defense, food, flag=0):
     '''
     This function offers the team a choice of action
@@ -11,9 +13,10 @@ def case(people, ar, attack, defense, food, flag=0):
     :param flag:
     :return: None
     '''
-    print(f'{ru.CHOOSING_ACTION} \n {ru.CHOICE_ATTACK} \n {ru.CHOICE_DEFENSE} \n {ru.CHOICE_LOCATION} \n {ru.CHOICE_FOOD}')
+    print(
+        f'{ru.CHOOSING_ACTION} \n {ru.CHOICE_ATTACK} \n {ru.CHOICE_DEFENSE} \n {ru.CHOICE_LOCATION} \n {ru.CHOICE_FOOD}')
     var = int(input())
-    while var not in [1,4]:
+    while var not in [1, 4]:
         print(ru.MISTAKE)
         var = int(input())
     match var:
