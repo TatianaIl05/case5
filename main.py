@@ -14,6 +14,8 @@ attack = [int(people[0] * 0.3) * ar[0], int(people[1] * 0.3) * ar[1], int(people
 usage = [people[0] * 0.5, people[1] * 0.5, people[2] * 0.5, people[3] * 0.5]
 defense = [5000, 5000, 5000, 5000]
 findings = [0, 0, 0, 0]
+rival_teams = [0] * 12
+
 
 def start_info():
     '''
@@ -29,7 +31,14 @@ def start_info():
     print(table)
 
 
-rival_teams = [0] * 12
+def alien_invasion(team_num):
+    probability = randint(1, 100) / 100
+
+    if probability > 0.8:
+        print(ru.ALIEN_ATTACK)
+        people[team_num - 1] *= 0.9
+        defense[team_num - 1] *= 0.9
+        print(ru.CREW, people[team_num - 1], ru.DEFENSE, defense[team_num - 1])
 
 
 def question():
@@ -69,20 +78,26 @@ def battle():
     This function determines the result of the match between the teams.
     :return: None
     '''
-    global step
-    num_ask = randint(1, 100)
-    num_accept = randint(1, 100)
-    print(ru.TEAM_CHELLENGE, num_ask, ru.SECOND_TEAM, num_accept)
-    if num_ask > num_accept:
-        food[rival_teams.index(team) - 4 * step] += 0.5 * food[team - 1]
-        food[team - 1] *= 0.5
-    elif num_ask < num_accept:
-        food[team - 1] += 0.5 * food[rival_teams.index(team) - 4 * step]
-        food[rival_teams.index(team) - 4 * step] *= 0.5
-    else:
+    if attack[team - 1] == attack[rival_teams.index(team) - 4 * step]:
         food[team - 1] += 50
         food[rival_teams.index(team) - 4 * step] += 50
-    print(ru.RESOURCES_EQUAL, food[rival_teams.index(team) - 4 * step], food[team - 1])
+        print(ru.DRAW)
+    elif attack[team - 1] > attack[rival_teams.index(team) - 4 * step]:
+        food[team - 1] += 0.5 * food[rival_teams.index(team) - 4 * step]
+        food[rival_teams.index(team) - 4 * step] *= 0.5
+        findings[team - 1] += findings[rival_teams.index(team) - 4 * step]
+        findings[rival_teams.index(team) - 4 * step] = 0
+        team_win = team
+        print(ru.TWO_FIGHT_WINNER, food[team_win - 1], findings[team_win - 1])
+    else:
+        food[rival_teams.index(team) - 4 * step] += 0.5 * food[team - 1]
+        food[team - 1] *= 0.5
+        findings[rival_teams.index(team) - 4 * step] += findings[team - 1]
+        findings[team - 1] = 0
+        team_win = rival_teams.index(team) - 4 * step + 1
+        print(ru.TWO_FIGHT_WINNER, food[team_win - 1], findings[team_win - 1])
+    print(ru.RESOURCES_EQUAL, ru.FOODS, food[rival_teams.index(team) - 4 * step], food[team - 1],
+          ru.ARTEFACTS, findings[rival_teams.index(team) - 4 * step],  findings[team - 1])
     rival_teams[rival_teams.index(team)] = 0
 
 
@@ -94,16 +109,17 @@ def reconcile():
     global step
     food[team - 1] *= 0.8
     people[rival_teams.index(team) - 4 * step] *= 0.8
-    print(ru.RESOURCES_EQUAL, people[rival_teams.index(team) - 4 * step], food[team - 1])
+    print(ru.RESOURCES_EQUAL, ru.COMMENT, people[rival_teams.index(team) - 4 * step], food[team - 1])
     rival_teams[rival_teams.index(team)] = 0
 
 
-for step in range(1):
+for step in range(3):
     for team in range(1, 4 + 1):
         print(f'\n {ru.MOTION} {step + 1} {ru.TEAM_NUMBER} {team}')
-        people[team - 1], defense[team - 1] = METEOR_RAIN.meteor_rain(people[team - 1], defense[team - 1])
         start_info()
+        people[team - 1], defense[team - 1] = METEOR_RAIN.meteor_rain(people[team - 1], defense[team - 1])
         ran.sickness(people[team - 1])
+        alien_invasion(team)
         people[team - 1], ar[team - 1], defense[team - 1], food[team - 1], flag = case.case(people[team - 1],
                                                                                             ar[team - 1],
                                                                                             attack[team - 1],
