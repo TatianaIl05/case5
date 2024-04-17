@@ -4,9 +4,9 @@ import ru_local
 def starve(food, people, usage):
     '''
     This function declares hunger when the food value of the team is low.
-    :param food:
-    :param people:
-    :param usage:
+    :param food: food count
+    :param people: number of people in team
+    :param usage: usage
     :return: [food - usage, people, people * 0.5]
     '''
     if usage > food:
